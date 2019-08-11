@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const createError = require('http-errors');
 
@@ -9,7 +11,7 @@ const User = require('../models/user');
 const {
   isLoggedIn,
   isNotLoggedIn,
-  validationLoggin,
+  validationLoggin
 } = require('../helpers/middlewares');
 
 router.get('/me', isLoggedIn(), (req, res, next) => {
@@ -35,7 +37,7 @@ router.post(
     } catch (error) {
       next(error);
     }
-  },
+  }
 );
 
 router.post(
@@ -59,7 +61,7 @@ router.post(
     } catch (error) {
       next(error);
     }
-  },
+  }
 );
 
 router.post('/logout', isLoggedIn(), (req, res, next) => {
@@ -69,7 +71,7 @@ router.post('/logout', isLoggedIn(), (req, res, next) => {
 
 router.get('/private', isLoggedIn(), (req, res, next) => {
   res.status(200).json({
-    message: 'This is a private message',
+    message: 'This is a private message'
   });
 });
 
