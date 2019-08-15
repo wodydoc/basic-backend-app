@@ -6,7 +6,7 @@ const createError = require('http-errors');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
-const User = require('../models/user');
+const User = require('../models/User');
 
 const {
   isLoggedIn,
@@ -65,7 +65,7 @@ router.post(
 );
 
 router.post('/logout', isLoggedIn(), (req, res, next) => {
-  req.session.destroy();
+  delete req.session.currentUser;
   return res.status(204).send();
 });
 
