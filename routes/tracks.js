@@ -7,7 +7,7 @@ const User = require('../models/User.js');
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
-  // GETTING ALL THE TRACKS FROM DB - USED IN SEARCH
+  // GETTING ALL THE DECKS FROM DB - USED IN SEARCH
   try {
     const listOfTracks = await Track.find({});
     res.status(200).json(listOfTracks);

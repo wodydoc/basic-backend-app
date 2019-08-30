@@ -18,8 +18,7 @@ const trackSchema = new Schema({
     required: true
   },
   category: {
-    type: String,
-    required: true,
+    type: Array,
     enum: ['adverbs', 'slang', 'greetings', 'subjunctive', 'cute']
   }
 });

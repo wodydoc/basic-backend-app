@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/my', async (req, res, next) => {
-  // GETTING ONLY MY SONGS - THE SONGS I HAVE SAVED
+  // GETTING ONLY MY VOCABULARY DECKS - THE WORDS I HAVE SAVED
   try {
     const { _id } = req.session.currentUser;
     const myUserInfo = await User.findById(_id).populate('decks');
@@ -40,13 +40,20 @@ router.post('/create', async (req, res, next) => {
   }
 });
 
-router.put('/:id/save', (req, res, next) => {
-// Save one track
-
+router.put('/:id/save', async (req, res, next) => {
+// Save one deck
+  const { _id } = req.session.currentUser;
+  const { id } = req.params;
+  const updatedUser = await User.findByIdAndUpdate(_id, { $push: { decks: id } }, { new: true }).populate('decks');
+  res.status(200).json({ updatedUser });
 });
 
-router.delete('/:id/unsave', (req, res, next) => {
-  // Unsave one Track
+router.delete('/:id/unsave', async (req, res, next) => {
+  // Unsave one deck
+  const { _id } = req.session.currentUser;
+  const { id } = req.params;
+  const updatedUser = await User.findByIdAndUpdate(_id, { $pull: { decks: id } }, { new: true }).populate('decks');
+  res.status(200).json({ updatedUser });
 });
 
 module.exports = router;
